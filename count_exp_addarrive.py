@@ -62,10 +62,31 @@ for line in coutn_file:
     if not isinstance(exp_dict, dict):
         continue
     for key,value in exp_dict.items():
-        if key.find("_id")  == -1:
+        if "ext" in exp_dict:
+            try:
+                ext = json.loads(exp_dict["ext"])
+            except:
+                continue
+        else:
             continue
-#        if key.find("ext") == -1:
-#            continue
+
+        install_authority = 0
+        if "install_authority" in ext:
+            install_authority = int(ext["install_authority"])
+        else:
+            continue
+
+        if install_authority == 1:
+            if key.find("_id")  == -1:
+                continue
+            if "noauth" in key:
+                continue
+        else:
+            if key.find("_id") == -1:
+                continue
+            if "noauth" not in key:
+                continue
+        
         key_str = "%s_%s"%(key,value)
 #        key_str = fleds[46] 
         #total_dict["%s_%d"%(key,value)] = {}
@@ -99,7 +120,10 @@ for line in coutn_file:
         offer_dict[key_str] = sub_dict
         
         sub_dict = {"show":0,"clk":0,"price":0,"load":0,"action":0,"action_clk":0,"cost":0,"noauthshow":0,"noauthclk":0,"noauthprice":0,"noauthload":0,"noauthaction":0,"noauthaction_clk":0,"noauthcost":0}
-        ext = json.loads(exp_dict["ext"])
+        try:
+            ext = json.loads(exp_dict["ext"])
+        except:
+            continue
         if "install_authority" not in ext:
             continue
         install_auth = int(ext["install_authority"])
@@ -192,7 +216,7 @@ for k,v in sorted(offer_dict.items(),cmp=lambda x,y : cmp(x[0], y[0]),reverse=Fa
         action_r = (action)/float(action_click)
     print("New Offer %s Model SHOW:%10d, CLICK:%7d CTR:%10f ACTION:%10d ACTION_CLICK:%10d CVR:%f CPM:%f" % (k,show, click, ctr, action,action_click,action_r,cpm))
 
-for k,v in sorted(authority_dict.items(),cmp=lambda x,y : cmp(x[0], y[0]),reverse=False):
+'''for k,v in sorted(authority_dict.items(),cmp=lambda x,y : cmp(x[0], y[0]),reverse=False):
     click = float(v["clk"])
     show = float(v["show"])
     load = float(v["load"])
@@ -218,6 +242,7 @@ for k,v in sorted(authority_dict.items(),cmp=lambda x,y : cmp(x[0], y[0]),revers
     if action_click > 0:
         action_r = (action)/float(action_click)
     print("No  Authority %s Model SHOW:%10d, CLICK:%7d CTR:%10f ACTION:%10d ACTION_CLICK:%10d CVR:%f CPM:%f" % (k,show, click, ctr, action,action_click,action_r,cpm))
+'''
 '''
 print("Country,Show,Click,CTR,Conversion,income,cpm")
 for k,v in sorted(country_dict.items(),cmp=lambda x,y : cmp(x[0], y[0]),reverse=False):

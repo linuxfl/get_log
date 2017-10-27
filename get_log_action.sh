@@ -68,8 +68,8 @@ echo "click_log=${click_log}" >> ${done_file}
 echo "conversion_log=${conversion_log}" >> ${done_file}
 
 python count_post_cvr_data.py ${conversion_log}  con_stat.dat
-
 scp_model con_stat.dat "172.16.42.111" "/home/work/run_env/DEPLOY/Hive/Bidder/data" "con_stat.dat"
+
 rm -rf ${incre_click}
 rm -rf ${incre_click}.tag
 exit 0
