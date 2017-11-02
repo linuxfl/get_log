@@ -26,6 +26,7 @@ last_end_time_stamp=${end_timestamp}
 # ~/disk/Hive/data/clicked_shitu_log
 for file in `ls  /home/work/disk/Hive/data/clicked_shitu_log/click_shitu_[0-9]* | tac`;do
     timeflag=${file:0-10}
+    echo $last_end_time_stamp
     if (( timeflag > last_end_time_stamp ));then
         cat ${file}  >> ${incre_click}
         if (( timeflag > new_end_time_stamp ));then
@@ -45,15 +46,15 @@ if [[ $? -ne 0 ]];then
     exit 1
 fi
 
-#add_line=`sed -n "$=" ${incre_click}`
+add_line=`sed -n "$=" ${incre_click}`
 cat ${incre_click}.tag >> ${click_log} &&  rm -rf ${incre_click} && rm -rf ${incre_click}.tag
 
-#fix_sample_number=1
-#if [[ $fix_sample_number -eq 1 ]];then
-#    if [[ $add_line -ne 0 ]];then
-#        sed -i "1,${add_line}d" ${click_log}
-#    fi
-#fi
+fix_sample_number=1
+if [[ $fix_sample_number -eq 1 ]];then
+    if [[ $add_line -ne 0 ]];then
+        sed -i "1,${add_line}d" ${click_log}
+    fi
+fi
 
 mv ${conversion_log} ${conversion_log}.bk
 python join_action.py ${click_log} ${active_events_log} ${conversion_log}
@@ -67,8 +68,8 @@ echo "end_timestamp=${new_end_time_stamp}" > ${done_file}
 echo "click_log=${click_log}" >> ${done_file}
 echo "conversion_log=${conversion_log}" >> ${done_file}
 
-python count_post_cvr_data.py ${conversion_log}  con_stat.dat
-scp_model con_stat.dat "172.16.42.111" "/home/work/run_env/DEPLOY/Hive/Bidder/data" "con_stat.dat"
+#python count_post_cvr_data.py ${conversion_log}  con_stat.dat
+#scp_model con_stat.dat "172.16.42.111" "/home/work/run_env/DEPLOY/Hive/Bidder/data" "con_stat.dat"
 
 rm -rf ${incre_click}
 rm -rf ${incre_click}.tag
