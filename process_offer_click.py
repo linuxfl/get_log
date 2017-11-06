@@ -13,12 +13,12 @@ def process(infile,outfile):
     for raw_line in open(infile):
         line = raw_line.lower().rstrip("\r\n").split("\001")
         
-        affname = line[48].strip()
-        offerid = line[46].strip()
+        affname = line[47].strip()
+        offerid = line[45].strip()
 
         key = affname + "\001" + offerid
-        country_code = line[27].strip().split(":")[0].upper()
-
+        country_code = line[26].strip().split(":")[0].upper()
+        
         if key in click_dict:
             if country_code in click_dict[key]:
                 click_dict[key][country_code] += 1
