@@ -50,7 +50,9 @@ echo "click_log=${click_log}" >> ${done_file}
 echo "conversion_log=${conversion_log}" >> ${done_file}
 echo "active_events_log=${active_events_log}" >> ${done_file}
 
-python count_post_cvr_data.py ${conversion_log}  con_stat_noauth.dat
-scp_model con_stat_noauth.dat "172.16.42.111" "/home/work/run_env/DEPLOY/Hive/Bidder/data" "con_stat_noauth.dat"
+#python count_post_cvr_data.py ${conversion_log}  con_stat_noauth.dat
+#scp_model con_stat_noauth.dat "172.16.42.111" "/home/work/run_env/DEPLOY/Hive/Bidder/data" "con_stat_noauth.dat"
+#scp_model con_stat_noauth.dat "172.16.42.112" "/home/work/run_env/DEPLOY/Hive/Bidder/data" "con_stat_noauth.dat"
+
 
 exit 0
