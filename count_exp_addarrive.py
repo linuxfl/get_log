@@ -46,6 +46,8 @@ for line in coutn_file:
         exp_dict = json.loads(fleds[37])
     except:
         print "format[%s] not json[%s]"%(fleds[37],fleds[4])
+        print line
+        continue
 
     price = fleds[45]
     try:
