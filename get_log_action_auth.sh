@@ -29,7 +29,7 @@ for file in `ls  /home/work/disk/Hive/data/clicked_shitu_log/click_shitu_auth_[0
     fi  
 done
 
-python process_install_num.py ${incre_click} ${incre_click}.tag
+python process_install_num_auth.py ${incre_click} ${incre_click}.tag
 if [[ $? -ne 0 ]];then
     echo "process install num error"
     exit 1

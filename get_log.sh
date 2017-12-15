@@ -9,7 +9,7 @@ echo $file_time_flag
 
 pid=$$
 #engine log
-remote_log_machine=172.16.42.111
+remote_log_machine=172.16.42.112
 remote_log_path=/home/work/run_env/DEPLOY/Hive/Logger/log
 HOME="/home/work/disk/Hive/data"
 dest_file_path="${HOME}/ori_log"

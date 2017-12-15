@@ -27,8 +27,7 @@ def process(infile,outfile):
         isnew = 0
         if line[49] == "1.000000":
             isnew = 1
-        diffclk = int(meta_info["offer_country_click_2h"]) - int(meta_info["offer_country_click_1h"])
-        diffconv = int(meta_info["offer_country_conversion_2h"]) - int(meta_info["offer_country_conversion_1h"])
+        
         try:
             diffclk = int(meta_info["offer_country_click_2h"]) - int(meta_info["offer_country_click_1h"])
             diffconv = int(meta_info["offer_country_conversion_2h"]) - int(meta_info["offer_country_conversion_1h"])
