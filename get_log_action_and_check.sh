@@ -10,7 +10,7 @@ if [[ $1 == "auth" ]];then
         python dingding_notifier.py "get log action auth error!!!"
         exit 1
     fi
-elif [[ $1 == "noath" ]];then
+elif [[ $1 == "noauth" ]];then
     bash -x get_log_action_noauth.sh
     if [[ $? -ne 0 ]];then
         python dingding_notifier.py "get log action noauth error!!!"
