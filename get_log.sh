@@ -121,7 +121,10 @@ gawk -F'\001' '$1==1' ${shitu_path}/shitu_$done_file_time_flag > ${pos_shitu_pat
 #seperate the install authority and no install authority click log
 python process_install_authority.py ${pos_shitu_path}/click_shitu_$done_file_time_flag ${pos_shitu_path}/click_shitu_auth_$done_file_time_flag 1
 python process_install_authority.py ${pos_shitu_path}/click_shitu_$done_file_time_flag ${pos_shitu_path}/click_shitu_noauth_$done_file_time_flag 0
-
+if [[ $? -ne 0 ]];then
+    echo "process install authority error!"
+    exit 1
+fi
 #gawk -F'\001' '$1==1' ${download_path}/shitu_download_$done_file_time_flag > ${pos_download_shitu_path}/download_shitu_$done_file_time_flag
 #scp action
 exit 0
